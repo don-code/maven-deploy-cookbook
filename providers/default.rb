@@ -21,9 +21,18 @@ action :create do
     break if ok
   end
 
-  if not ok then
+  if ok then
+    # Set file owner, group, and permissions, if requested
+    ::File.chown(
+      new_resource.owner.nil? ? nil : Etc.getpwnam(new_resource.owner).uid,
+      new_resource.group.nil? ? nil : Etc.getgrnam(new_resource.group).gid,
+      new_resource.deploy_to
+    )
+    ::File.chmod(new_resource.mode.to_i, new_resource.deploy_to) unless new_resource.mode.nil?
+  else
     raise "Not found artifact #{ new_resource.name } in any of the provided repositories"
   end
+
 end
 
 # Returns true if artifact was correctly downloaded from repository

@@ -11,5 +11,8 @@ attribute :version, :kind_of => String, :required => true
 attribute :classifier, :kind_of => String
 attribute :packaging, :kind_of => String, :default => 'jar'
 attribute :useMavenMetadata, :kind_of => [TrueClass, FalseClass], :default => true
+attribute :owner, :kind_of => String
+attribute :group, :kind_of => String
+attribute :mode, :kind_of => [String, Integer]
 
 attr_accessor :exists

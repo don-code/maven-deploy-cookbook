@@ -14,6 +14,14 @@ suites:
     run_list:
       - "recipe[maven_deploy_test]"
 
+  - name: file-properties
+    attributes:
+      maven_deploy:
+        repositories:
+          central: "https://repo1.maven.org/maven2"
+    run_list:
+      - "recipe[maven_deploy_test::file-properties]"
+
   - name: no_repository_data
     attributes:
       maven_deploy:
